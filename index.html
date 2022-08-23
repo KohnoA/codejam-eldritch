@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <title>Eldritch Horror</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="cards-ancients">
+            <div class="azathoth" type="button"></div>
+            <div class="cthulthu" type="button"></div>
+            <div class="iog-sothoth" type="button"></div>
+            <div class="shub-niggurath" type="button"></div>
+        </header>
+        <main class="difficulty-level">
+            <button class="easy-level" type="button">Easy</button>
+            <button class="normal-level" type="button">Normal</button>
+            <button class="hard-level" type="button">Hard</button>
+        </main>
+        <footer class="deck-cards">
+            <button class="deck-mixed hidden" type="button">Mix deck</button>
+            <div class="stage-wrapper">
+                <div class="title-stage">First stage</div>
+                <div class="first-stage">
+                    <div class="first-stage-green color green"></div>
+                    <div class="first-stage-brown color brown"></div>
+                    <div class="first-stage-blue color blue"></div>
+                </div>
+                <div class="title-stage">Second stage</div>
+                <div class="second-stage">
+                    <div class="second-stage-green color green">1</div>
+                    <div class="second-stage-brown color brown">5</div>
+                    <div class="second-stage-blue color blue">4</div>
+                </div>
+                <div class="title-stage">Third stage</div>
+                <div class="third-stage">
+                    <div class="third-stage-green color green"></div>
+                    <div class="third-stage-brown color brown"></div>
+                    <div class="third-stage-blue color blue"></div>
+                </div>
+            </div>
+            <div class="current-card-wrapper">
+                <div class="current-card"></div>
+                <div class="card-shirt" type="button"></div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="./index.js"></script>
+</body>
+</html>

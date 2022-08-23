@@ -1,0 +1,228 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+    color: white;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: rgb(62, 62, 62);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-width: 100vh;
+    min-height: 100vh;
+
+    padding: 20px;
+    
+    background-image: url('./assets/home.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.cards-ancients {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.cards-ancients div {
+    position: relative;
+    padding: 0;
+    margin: 10px 10px;
+    min-width: 160px;
+    min-height: 220px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    border-radius: 14px;
+    border: none;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.7);
+    transition: .3s;
+    will-change: transform;
+}
+
+.cards-ancients div:hover,
+.cards-ancients div:focus {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.cards-ancients div:active {
+    transform: scale(1.05);
+    outline: 2px solid rgba(157, 12, 12, 1);
+    transition: 0.01s;
+} 
+
+.azathoth {
+    background-image: url('./assets/Ancients/Azathoth.png');
+}
+
+.cthulthu {
+    background-image: url('./assets/Ancients/Cthulthu.png');
+}
+
+.iog-sothoth {
+    background-image: url('./assets/Ancients/IogSothoth.png');
+}
+
+.shub-niggurath {
+    background-image: url('./assets/Ancients/ShubNiggurath.png');
+}
+
+.difficulty-level {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.difficulty-level button {
+    margin: 10px 15px;
+    padding: 8px 55px;
+    color: rgb(172, 172, 172);
+    border-radius: 10px;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+    border: 2px solid rgb(85, 72, 72);
+    transition: .3s;
+}
+
+.difficulty-level button:hover,
+.difficulty-level button:focus {
+    cursor: pointer;
+    background-color: rgb(85, 72, 72);
+}
+
+.difficulty-level button:active {
+    transform: scale(0.95);
+}
+
+.deck-cards {
+    display: flex;
+    justify-content: space-evenly;
+    min-height: 200px;
+    /* background-color: black; */
+}
+
+.deck-cards button {
+    margin: 10px 20px;
+    padding: 10px 55px;
+    max-height: 40px;
+    color: rgb(172, 172, 172);
+    border-radius: 10px;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+    border: 2px solid rgb(85, 72, 72);
+    transition: .3s;
+}
+
+.deck-cards button:hover,
+.deck-cards button:focus {
+    cursor: pointer;
+    background-color: rgb(85, 72, 72);
+}
+
+.deck-cards button:active {
+    transform: scale(0.95);
+}
+
+.title-stage {
+    font-size: 12px;
+    color: rgb(172, 172, 172);
+    text-align: center;
+}
+
+.first-stage,
+.second-stage,
+.third-stage {
+    display: flex;
+    justify-content: space-between;
+}
+
+.color {
+    font-size: 12px;
+    color: black;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.7);
+    transition: .3s;
+}
+
+.green {
+    background-color: green;
+}
+
+.brown {
+    background-color: brown;
+}
+
+.blue {
+    background-color: rgb(52, 52, 216);
+}
+
+.current-card-wrapper {
+    display: flex;
+    transition: .3s;
+}
+
+.card-shirt {
+    margin: auto 0;
+    margin-left: 10px;
+    width: 100px;
+    height: 150px;
+    background-image: url('./assets/mythicCardBackground.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.card-shirt:active {
+    outline: 2px solid rgba(157, 12, 12, 1);
+    transition: 0.01s;
+}
+
+.current-card {
+    margin: auto 0;
+    width: 100px;
+    height: 150px;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.hidden {
+    display: none;
+}
