@@ -60,21 +60,9 @@ img {
     border-radius: 14px;
     border: none;
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.7);
-    transition: .3s;
     will-change: transform;
-}
-
-.cards-ancients div:hover,
-.cards-ancients div:focus {
-    transform: scale(1.05);
     cursor: pointer;
 }
-
-.cards-ancients div:active {
-    transform: scale(1.05);
-    outline: 2px solid rgba(157, 12, 12, 1);
-    transition: 0.01s;
-} 
 
 .azathoth {
     background-image: url('./assets/Ancients/Azathoth.png');
@@ -98,7 +86,9 @@ img {
     margin-bottom: 20px;
 }
 
-.difficulty-level button {
+.easy-level,
+.normal-level,
+.hard-level {
     margin: 10px 15px;
     padding: 8px 55px;
     color: rgb(172, 172, 172);
@@ -106,16 +96,17 @@ img {
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.7);
     background-color: transparent;
     border: 2px solid rgb(85, 72, 72);
-    transition: .3s;
+    transition: .2s;
 }
 
 .difficulty-level button:hover,
 .difficulty-level button:focus {
     cursor: pointer;
-    background-color: rgb(85, 72, 72);
 }
 
-.difficulty-level button:active {
+.easy-level:active,
+.normal-level:active,
+.hard-level:active {
     transform: scale(0.95);
 }
 
@@ -123,7 +114,6 @@ img {
     display: flex;
     justify-content: space-evenly;
     min-height: 200px;
-    /* background-color: black; */
 }
 
 .deck-cards button {
@@ -141,7 +131,6 @@ img {
 .deck-cards button:hover,
 .deck-cards button:focus {
     cursor: pointer;
-    background-color: rgb(85, 72, 72);
 }
 
 .deck-cards button:active {
@@ -214,7 +203,7 @@ img {
     margin: auto 0;
     width: 100px;
     height: 150px;
-    background-color: black;
+    background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -225,4 +214,12 @@ img {
 
 .hidden {
     display: none;
+}
+
+.active-ancient {
+    outline: 2px solid rgb(228, 8, 8);
+}
+
+.active-difficulty {
+    background-color: rgb(85, 72, 72);
 }
