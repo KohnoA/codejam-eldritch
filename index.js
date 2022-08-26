@@ -111,7 +111,6 @@ function getRandomNum(min, max) {
 }
 
 //Формирование массивов с рандомными картами по цветам
-//Сделать похожие функции под другие сложности 
 function getNumberCards(stackName, colorCards, length) {
     
     for(let i = 0; i < length; i++) {
@@ -122,6 +121,42 @@ function getNumberCards(stackName, colorCards, length) {
             stackName.push(colorCards[randomCard])
         } else {
             stackName.push(colorCards[randomCard])
+        }
+    }
+
+    return stackName
+}
+
+function getNumberCardsEasy(stackName, colorCards, length) {
+
+    const sortCardEasyArr = colorCards.filter(item => item.difficulty !== 'hard')
+    
+    for(let i = 0; i < length; i++) {
+        let randomCard = getRandomNum(0, sortCardEasyArr.length)
+
+        if(stackName.includes(sortCardEasyArr[randomCard])) {
+            randomCard = getRandomNum(0, sortCardEasyArr.length)
+            stackName.push(sortCardEasyArr[randomCard])
+        } else {
+            stackName.push(sortCardEasyArr[randomCard])
+        }
+    }
+
+    return stackName
+}
+
+function getNumberCardsHard(stackName, colorCards, length) {
+
+    const sortCardHardArr = colorCards.filter(item => item.difficulty !== 'easy')
+    
+    for(let i = 0; i < length; i++) {
+        let randomCard = getRandomNum(0, sortCardHardArr.length)
+
+        if(stackName.includes(sortCardHardArr[randomCard])) {
+            randomCard = getRandomNum(0, sortCardHardArr.length)
+            stackName.push(sortCardHardArr[randomCard])
+        } else {
+            stackName.push(sortCardHardArr[randomCard])
         }
     }
 
@@ -161,7 +196,7 @@ function showCards(stackOne, stackTwo, stackThree) {
             console.log(stackOne) // ---------------
         }
     } catch(err) {
-        alert('deck is over')
+        // alert('deck is over')
     }
 }
 
@@ -172,6 +207,7 @@ function mixCard() {
     mix.classList.add('hidden')
     stage.classList.remove('hidden')
     currentCard.classList.remove('hidden')
+    showCard.style.backgroundImage = 'none'
 
     // Azathoth
     if(azathoth.classList.contains('active-ancient')) {
@@ -190,17 +226,37 @@ function mixCard() {
 
             getNumberCards(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
 
+            // console.log(stackGreen)
+            // console.log(stackBlue)
+            // console.log(stackBrown)
+
         // Easy difficulty
         } else if(easyLevel.classList.contains('active-difficulty')) {
             console.log('azathoth easy')
+            
+            getNumberCardsEasy(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
 
-            //Здесь поменять функию на изи лвл
+            getNumberCardsEasy(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+
+            getNumberCardsEasy(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+            // console.log(stackGreen)
+            // console.log(stackBlue)
+            // console.log(stackBrown)
 
         // Hard difficulty
         } else if(hardLevel.classList.contains('active-difficulty')) {
             console.log('azathoth hard')
 
-            ////Здесь поменять функию на хард лвл
+            getNumberCardsHard(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+
+            getNumberCardsHard(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+
+            getNumberCardsHard(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+            // console.log(stackGreen)
+            // console.log(stackBlue)
+            // console.log(stackBrown)
         }
 
         //Формирование мини-колод
@@ -234,6 +290,78 @@ function mixCard() {
             if(stackStageThree.length >= 0 && stackStageThree.length < 2) {
                 stackStageThree.push(stackGreen[i])
             } else if(stackStageThree.length >= 2) {
+                stackStageThree.push(stackBrown[i])
+            }
+        }
+
+        cardShirt.addEventListener('click', () => {
+            showCards(stackStageOne, stackStageTwo, stackStageThree)
+        })
+
+    // Cthulthu
+    } else if(cthulthu.classList.contains('active-ancient')) {
+        const numbersOfCardsObj = numbersOfCards(ancientsData[1])
+        let stackGreen = []
+        let stackBlue = []
+        let stackBrown = []
+
+        // Normal difficulty
+        if(normalLevel.classList.contains('active-difficulty')) {
+            console.log('cthulthu normal')
+
+            getNumberCards(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+
+            getNumberCards(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+
+            getNumberCards(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+        // Easy difficulty
+        } else if(easyLevel.classList.contains('active-difficulty')) {
+            console.log('cthulthu easy')
+
+            getNumberCardsEasy(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+
+            getNumberCardsEasy(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+
+            getNumberCardsEasy(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+        // Hard difficulty
+        } else if(hardLevel.classList.contains('active-difficulty')) {
+            console.log('cthulthu hard')
+
+            getNumberCardsHard(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+
+            getNumberCardsHard(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+
+            getNumberCardsHard(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+        }
+
+        const stackStageOne = []
+
+        for(let i = 0; i < 4; i++) {
+            if(stackStageOne.length >= 0 && stackStageOne.length < 2) {
+                stackStageOne.push(stackBlue[i])
+            } else if(stackStageOne.length >= 2) {
+                stackStageOne.push(stackBrown[i])
+            }
+        }
+
+        const stackStageTwo = []
+
+        for(let i = 0; i < 4; i++) {
+            if(stackStageTwo.length === 0) {
+                stackStageTwo.push(stackGreen[i])
+            } else if(stackStageTwo.length > 0) {
+                stackStageTwo.push(stackBrown[i])
+            }
+        }
+
+        const stackStageThree = []
+
+        for(let i = 0; i < 7; i++) {
+            if(stackStageThree.length >= 0 && stackStageThree.length < 3) {
+                stackStageThree.push(stackGreen[i])
+            } else if(stackStageThree.length >= 3) {
                 stackStageThree.push(stackBrown[i])
             }
         }
