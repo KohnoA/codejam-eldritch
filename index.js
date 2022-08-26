@@ -16,6 +16,15 @@ const cthulthu = document.querySelector('.cthulthu')
 const iogSothoth = document.querySelector('.iog-sothoth')
 const shubNiggurath = document.querySelector('.shub-niggurath')
 const main = document.querySelector('.difficulty-level')
+const difficultyLevel = document.querySelector('.difficulty-level')
+const easyLevel = document.querySelector('.easy-level')
+const normalLevel = document.querySelector('.normal-level')
+const hardLevel = document.querySelector('.hard-level')
+const mix = document.querySelector('.deck-mixed')
+const stage = document.querySelector('.stage-wrapper')
+const currentCard = document.querySelector('.current-card-wrapper')
+const cardShirt = document.querySelector('.card-shirt')
+const showCard = document.querySelector('.current-card')
 
 ancients.addEventListener('click', (event) => {
     let arrAncients = ancients.childNodes
@@ -48,11 +57,6 @@ ancients.addEventListener('click', (event) => {
     }
 })
 
-const difficultyLevel = document.querySelector('.difficulty-level')
-const easyLevel = document.querySelector('.easy-level')
-const normalLevel = document.querySelector('.normal-level')
-const hardLevel = document.querySelector('.hard-level')
-
 difficultyLevel.addEventListener('click', (event) => {
     let arrDifficultyLevel = difficultyLevel.childNodes
     let target = event.target
@@ -77,10 +81,6 @@ difficultyLevel.addEventListener('click', (event) => {
     stage.classList.add('hidden')
     currentCard.classList.add('hidden')
 })
-
-const mix = document.querySelector('.deck-mixed')
-const stage = document.querySelector('.stage-wrapper')
-const currentCard = document.querySelector('.current-card-wrapper')
 
 //Сложить суммы всех нужных карт по цветам 
 function numbersOfCards(ancient) {
@@ -146,7 +146,6 @@ function getNumberCardsEasy(stackName, colorCards, length) {
 }
 
 function getNumberCardsHard(stackName, colorCards, length) {
-
     const sortCardHardArr = colorCards.filter(item => item.difficulty !== 'easy')
     
     for(let i = 0; i < length; i++) {
@@ -174,8 +173,9 @@ function showCards(stackOne, stackTwo, stackThree) {
             img.onload = () => {
                 showCard.style.backgroundImage = `url(${img.src})`
             }
+            // console.log(stackThree[stackOne.length - 1])
             stackThree.pop()
-            console.log(stackThree) // ----------------
+            // console.log(stackThree)
         } else if(stackOne.length === 0) {
             stackTwo.sort(() => Math.random() - 0.5)
 
@@ -183,8 +183,9 @@ function showCards(stackOne, stackTwo, stackThree) {
             img.onload = () => {
                 showCard.style.backgroundImage = `url(${img.src})`
             }
+            // console.log(stackTwo[stackOne.length - 1])
             stackTwo.pop()
-            console.log(stackTwo) // -----------------
+            // console.log(stackTwo)
         } else {
             stackOne.sort(() => Math.random() - 0.5)
 
@@ -192,16 +193,83 @@ function showCards(stackOne, stackTwo, stackThree) {
             img.onload = () => {
                 showCard.style.backgroundImage = `url(${img.src})`
             }
+            // console.log(stackOne[stackOne.length - 1])
             stackOne.pop()
-            console.log(stackOne) // ---------------
+            // console.log(stackOne)
         }
     } catch(err) {
         // alert('deck is over')
     }
 }
 
-const cardShirt = document.querySelector('.card-shirt')
-const showCard = document.querySelector('.current-card')
+function showIndicator(stackOne, stackTwo, stackThree) {
+
+    // Stage1
+    const firstStageGreen = document.querySelector('.first-stage-green')
+    const firstStageBrown = document.querySelector('.first-stage-brown')
+    const firstStageBlue = document.querySelector('.first-stage-blue')
+    let firstStageGreenCount = 0
+    let firstStageBrownCount = 0
+    let firstStageBlueCount = 0
+
+    stackOne.forEach(item => {
+        if(item.color === 'blue') {
+            firstStageBlueCount++
+        } else if(item.color === 'brown') {
+            firstStageBrownCount++
+        } else if(item.color === 'green') {
+            firstStageGreenCount++
+        }
+    })
+
+    firstStageGreen.textContent = firstStageGreenCount
+    firstStageBrown.textContent = firstStageBrownCount
+    firstStageBlue.textContent = firstStageBlueCount
+
+    //Stage2
+    const secondStageGreen = document.querySelector('.second-stage-green')
+    const secondStageBrown = document.querySelector('.second-stage-brown')
+    const secondStageBlue = document.querySelector('.second-stage-blue')
+    let secondStageGreenCount = 0
+    let secondStageBrownCount = 0
+    let secondStageBlueCount = 0
+
+    stackTwo.forEach(item => {
+        if(item.color === 'blue') {
+            secondStageBlueCount++
+        } else if(item.color === 'brown') {
+            secondStageBrownCount++
+        } else if(item.color === 'green') {
+            secondStageGreenCount++
+        }
+    })
+
+    secondStageGreen.textContent = secondStageGreenCount
+    secondStageBrown.textContent = secondStageBrownCount
+    secondStageBlue.textContent = secondStageBlueCount
+
+    //Stage3
+    const thirdStageGreen = document.querySelector('.third-stage-green')
+    const thirdStageBrown = document.querySelector('.third-stage-brown')
+    const thirdStageBlue = document.querySelector('.third-stage-blue')
+    let thirdStageGreenCount = 0
+    let thirdStageBrownCount = 0
+    let thirdStageBlueCount = 0
+
+    stackThree.forEach(item => {
+        if(item.color === 'blue') {
+            thirdStageBlueCount++
+        } else if(item.color === 'brown') {
+            thirdStageBrownCount++
+        } else if(item.color === 'green') {
+            thirdStageGreenCount++
+        }
+    })
+
+    thirdStageGreen.textContent = thirdStageGreenCount
+    thirdStageBrown.textContent = thirdStageBrownCount
+    thirdStageBlue.textContent = thirdStageBlueCount
+} 
 
 function mixCard() {
     mix.classList.add('hidden')
@@ -219,13 +287,9 @@ function mixCard() {
         // Normal difficulty
         if(normalLevel.classList.contains('active-difficulty')) {
             console.log('azathoth normal')
-            
             getNumberCards(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
-
             getNumberCards(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
-
             getNumberCards(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
-
             // console.log(stackGreen)
             // console.log(stackBlue)
             // console.log(stackBrown)
@@ -233,13 +297,9 @@ function mixCard() {
         // Easy difficulty
         } else if(easyLevel.classList.contains('active-difficulty')) {
             console.log('azathoth easy')
-            
             getNumberCardsEasy(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
-
             getNumberCardsEasy(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
-
             getNumberCardsEasy(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
-
             // console.log(stackGreen)
             // console.log(stackBlue)
             // console.log(stackBrown)
@@ -247,19 +307,15 @@ function mixCard() {
         // Hard difficulty
         } else if(hardLevel.classList.contains('active-difficulty')) {
             console.log('azathoth hard')
-
             getNumberCardsHard(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
-
             getNumberCardsHard(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
-
             getNumberCardsHard(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
-
             // console.log(stackGreen)
             // console.log(stackBlue)
             // console.log(stackBrown)
         }
 
-        //Формирование мини-колод
+        //Formation of mini-decks by Azathoth
         const stackStageOne = []
 
         for(let i = 0; i < 4; i++) {
@@ -294,7 +350,10 @@ function mixCard() {
             }
         }
 
+        showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+        
         cardShirt.addEventListener('click', () => {
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
             showCards(stackStageOne, stackStageTwo, stackStageThree)
         })
 
@@ -308,34 +367,26 @@ function mixCard() {
         // Normal difficulty
         if(normalLevel.classList.contains('active-difficulty')) {
             console.log('cthulthu normal')
-
             getNumberCards(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
-
             getNumberCards(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
-
             getNumberCards(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
 
         // Easy difficulty
         } else if(easyLevel.classList.contains('active-difficulty')) {
             console.log('cthulthu easy')
-
             getNumberCardsEasy(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
-
             getNumberCardsEasy(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
-
             getNumberCardsEasy(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
 
         // Hard difficulty
         } else if(hardLevel.classList.contains('active-difficulty')) {
             console.log('cthulthu hard')
-
             getNumberCardsHard(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
-
             getNumberCardsHard(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
-
             getNumberCardsHard(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
         }
 
+        //Formation of mini-decks by Cthulthu
         const stackStageOne = []
 
         for(let i = 0; i < 4; i++) {
@@ -366,7 +417,150 @@ function mixCard() {
             }
         }
 
+        showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+
         cardShirt.addEventListener('click', () => {
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+            showCards(stackStageOne, stackStageTwo, stackStageThree)
+        })
+
+    // IogSothoth
+    } else if(iogSothoth.classList.contains('active-ancient')) {
+        const numbersOfCardsObj = numbersOfCards(ancientsData[2])
+        let stackGreen = []
+        let stackBlue = []
+        let stackBrown = []
+        
+        // Normal difficulty
+        if(normalLevel.classList.contains('active-difficulty')) {
+            console.log('iogSothoth normal')
+            getNumberCards(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+            getNumberCards(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+            getNumberCards(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+        // Easy difficulty
+        } else if(easyLevel.classList.contains('active-difficulty')) {
+            console.log('iogSothoth easy')
+            getNumberCardsEasy(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+            getNumberCardsEasy(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+            getNumberCardsEasy(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+        // Hard difficulty
+        } else if(hardLevel.classList.contains('active-difficulty')) {
+            console.log('iogSothoth hard')
+            getNumberCardsHard(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+            getNumberCardsHard(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+            getNumberCardsHard(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+        }
+
+        //Formation of mini-decks by IogSothoth
+        const stackStageOne = []
+
+        for(let i = 0; i < 3; i++) {
+            if(stackStageOne.length === 0) {
+                stackStageOne.push(stackBlue[i])
+            } else if(stackStageOne.length >= 1) {
+                stackStageOne.push(stackBrown[i])
+            }
+        }
+
+        const stackStageTwo = []
+
+        for(let i = 0; i < 6; i++) {
+            if(stackStageTwo.length === 0) {
+                stackStageTwo.push(stackBlue[i])
+            } else if(stackStageTwo.length >= 1 && stackStageTwo.length < 3) {
+                stackStageTwo.push(stackGreen[i])
+            } else if(stackStageTwo.length >= 3) {
+                stackStageTwo.push(stackBrown[i])
+            }
+        }
+
+        const stackStageThree = []
+
+        for(let i = 0; i < 7; i++) {
+            if(stackStageThree.length >= 0 && stackStageThree.length < 3) {
+                stackStageThree.push(stackGreen[i])
+            } else if(stackStageThree.length >= 3) {
+                stackStageThree.push(stackBrown[i])
+            }
+        }
+
+        showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+
+        cardShirt.addEventListener('click', () => {
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+            showCards(stackStageOne, stackStageTwo, stackStageThree)
+        })
+
+    // ShubNiggurath
+    } else if(shubNiggurath.classList.contains('active-ancient')) {
+        const numbersOfCardsObj = numbersOfCards(ancientsData[3])
+        let stackGreen = []
+        let stackBlue = []
+        let stackBrown = []
+
+        // Normal difficulty
+        if(normalLevel.classList.contains('active-difficulty')) {
+            console.log('shubNiggurath normal')
+            getNumberCards(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+            getNumberCards(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+            getNumberCards(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+        // Easy difficulty
+        } else if(easyLevel.classList.contains('active-difficulty')) {
+            console.log('shubNiggurath easy')
+            getNumberCardsEasy(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+            getNumberCardsEasy(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+            getNumberCardsEasy(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+
+        // Hard difficulty
+        } else if(hardLevel.classList.contains('active-difficulty')) {
+            console.log('shubNiggurath hard')
+            getNumberCardsHard(stackGreen, cardsGreen, numbersOfCardsObj.greenCards)
+            getNumberCardsHard(stackBlue, cardsBlue, numbersOfCardsObj.blueCards)
+            getNumberCardsHard(stackBrown, cardsBrown, numbersOfCardsObj.brownCards)
+        }
+
+        //Formation of mini-decks by ShubNiggurath
+        const stackStageOne = []
+
+        for(let i = 0; i < 4; i++) {
+            if(stackStageOne.length === 0) {
+                stackStageOne.push(stackBlue[i])
+            } else if(stackStageOne.length === 1) {
+                stackStageOne.push(stackGreen[i])
+            } else if(stackStageOne.length > 1) {
+                stackStageOne.push(stackBrown[i])
+            }
+        }
+
+        const stackStageTwo = []
+
+        for(let i = 0; i < 6; i++) {
+            if(stackStageTwo.length === 0) {
+                stackStageTwo.push(stackBlue[i])
+            } else if(stackStageTwo.length >= 1 && stackStageTwo.length < 4) {
+                stackStageTwo.push(stackGreen[i])
+            } else if(stackStageTwo.length >= 4) {
+                stackStageTwo.push(stackBrown[i])
+            }
+        }
+
+        const stackStageThree = []
+
+        for(let i = 0; i < 6; i++) {
+            if(stackStageThree.length >= 0 && stackStageThree.length < 2) {
+                stackStageThree.push(stackGreen[i])
+            } else if(stackStageThree.length >= 2) {
+                stackStageThree.push(stackBrown[i])
+            }
+        }
+
+        showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+
+        cardShirt.addEventListener('click', () => {
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
             showCards(stackStageOne, stackStageTwo, stackStageThree)
         })
     }
