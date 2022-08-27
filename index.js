@@ -128,7 +128,6 @@ function getNumberCards(stackName, colorCards, length) {
 }
 
 function getNumberCardsEasy(stackName, colorCards, length) {
-
     const sortCardEasyArr = colorCards.filter(item => item.difficulty !== 'hard')
     
     for(let i = 0; i < length; i++) {
@@ -173,7 +172,6 @@ function showCards(stackOne, stackTwo, stackThree) {
             img.onload = () => {
                 showCard.style.backgroundImage = `url(${img.src})`
             }
-            // console.log(stackThree[stackOne.length - 1])
             stackThree.pop()
             // console.log(stackThree)
         } else if(stackOne.length === 0) {
@@ -183,7 +181,6 @@ function showCards(stackOne, stackTwo, stackThree) {
             img.onload = () => {
                 showCard.style.backgroundImage = `url(${img.src})`
             }
-            // console.log(stackTwo[stackOne.length - 1])
             stackTwo.pop()
             // console.log(stackTwo)
         } else {
@@ -193,7 +190,6 @@ function showCards(stackOne, stackTwo, stackThree) {
             img.onload = () => {
                 showCard.style.backgroundImage = `url(${img.src})`
             }
-            // console.log(stackOne[stackOne.length - 1])
             stackOne.pop()
             // console.log(stackOne)
         }
@@ -203,7 +199,6 @@ function showCards(stackOne, stackTwo, stackThree) {
 }
 
 function showIndicator(stackOne, stackTwo, stackThree) {
-
     // Stage1
     const firstStageGreen = document.querySelector('.first-stage-green')
     const firstStageBrown = document.querySelector('.first-stage-brown')
@@ -567,3 +562,7 @@ function mixCard() {
 }
 
 mix.addEventListener('click', mixCard)
+
+console.log('Выполненные требования')
+console.log('- Четыре древних +20 \n- Три уровня сложности +15 \n- Карты замешиваются по правилам игры +40 \n- Реализован трекер текущего состояния колоды +20')
+console.log('Итого: 95')
