@@ -25,6 +25,9 @@ const stage = document.querySelector('.stage-wrapper')
 const currentCard = document.querySelector('.current-card-wrapper')
 const cardShirt = document.querySelector('.card-shirt')
 const showCard = document.querySelector('.current-card')
+const stageTitleSecond = document.querySelector('.title-stage-second')
+const stageTitleThird = document.querySelector('.title-stage-third')
+const stageTitleFirst = document.querySelector('.title-stage-first')
 
 ancients.addEventListener('click', (event) => {
     let arrAncients = ancients.childNodes
@@ -112,7 +115,7 @@ function getRandomNum(min, max) {
 
 //Формирование массивов с рандомными картами по цветам
 function getNumberCards(stackName, colorCards, length) {
-    
+
     for(let i = 0; i < length; i++) {
         let randomCard = getRandomNum(0, colorCards.length)
         
@@ -216,10 +219,14 @@ function showIndicator(stackOne, stackTwo, stackThree) {
             firstStageGreenCount++
         }
     })
-
+    
     firstStageGreen.textContent = firstStageGreenCount
     firstStageBrown.textContent = firstStageBrownCount
     firstStageBlue.textContent = firstStageBlueCount
+
+    if(firstStageGreenCount == 0 && firstStageBrownCount == 0 && firstStageBlueCount == 0) {
+        stageTitleFirst.style.color = 'red'
+    }
 
     //Stage2
     const secondStageGreen = document.querySelector('.second-stage-green')
@@ -242,6 +249,10 @@ function showIndicator(stackOne, stackTwo, stackThree) {
     secondStageGreen.textContent = secondStageGreenCount
     secondStageBrown.textContent = secondStageBrownCount
     secondStageBlue.textContent = secondStageBlueCount
+    
+    if(secondStageGreenCount == 0 && secondStageBrownCount == 0 && secondStageBlueCount == 0) {
+        stageTitleSecond.style.color = 'red'
+    }
 
     //Stage3
     const thirdStageGreen = document.querySelector('.third-stage-green')
@@ -264,13 +275,20 @@ function showIndicator(stackOne, stackTwo, stackThree) {
     thirdStageGreen.textContent = thirdStageGreenCount
     thirdStageBrown.textContent = thirdStageBrownCount
     thirdStageBlue.textContent = thirdStageBlueCount
-} 
+
+    if(thirdStageGreenCount == 0 && thirdStageBrownCount == 0 && thirdStageBlueCount == 0) {
+        stageTitleThird.style.color = 'red'
+    }
+}
 
 function mixCard() {
     mix.classList.add('hidden')
     stage.classList.remove('hidden')
     currentCard.classList.remove('hidden')
     showCard.style.backgroundImage = 'none'
+    stageTitleFirst.style.color = 'rgb(172, 172, 172)'
+    stageTitleSecond.style.color = 'rgb(172, 172, 172)'
+    stageTitleThird.style.color = 'rgb(172, 172, 172)'
 
     // Azathoth
     if(azathoth.classList.contains('active-ancient')) {
@@ -346,11 +364,16 @@ function mixCard() {
         }
 
         showIndicator(stackStageOne, stackStageTwo, stackStageThree)
-        
-        cardShirt.addEventListener('click', () => {
-            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+
+        cardShirt.addEventListener('click', show)
+
+        function show() {
             showCards(stackStageOne, stackStageTwo, stackStageThree)
-        })
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+            if(stackStageOne.length == 0 && stackStageTwo.length == 0 && stackStageThree.length == 0) {
+                cardShirt.removeEventListener('click', show)
+            }
+        }
 
     // Cthulthu
     } else if(cthulthu.classList.contains('active-ancient')) {
@@ -414,10 +437,15 @@ function mixCard() {
 
         showIndicator(stackStageOne, stackStageTwo, stackStageThree)
 
-        cardShirt.addEventListener('click', () => {
-            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+        cardShirt.addEventListener('click', show)
+
+        function show() {
             showCards(stackStageOne, stackStageTwo, stackStageThree)
-        })
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+            if(stackStageOne.length == 0 && stackStageTwo.length == 0 && stackStageThree.length == 0) {
+                cardShirt.removeEventListener('click', show)
+            }
+        }
 
     // IogSothoth
     } else if(iogSothoth.classList.contains('active-ancient')) {
@@ -483,10 +511,15 @@ function mixCard() {
 
         showIndicator(stackStageOne, stackStageTwo, stackStageThree)
 
-        cardShirt.addEventListener('click', () => {
-            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+        cardShirt.addEventListener('click', show)
+
+        function show() {
             showCards(stackStageOne, stackStageTwo, stackStageThree)
-        })
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+            if(stackStageOne.length == 0 && stackStageTwo.length == 0 && stackStageThree.length == 0) {
+                cardShirt.removeEventListener('click', show)
+            }
+        }
 
     // ShubNiggurath
     } else if(shubNiggurath.classList.contains('active-ancient')) {
@@ -554,10 +587,15 @@ function mixCard() {
 
         showIndicator(stackStageOne, stackStageTwo, stackStageThree)
 
-        cardShirt.addEventListener('click', () => {
-            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+        cardShirt.addEventListener('click', show)
+
+        function show() {
             showCards(stackStageOne, stackStageTwo, stackStageThree)
-        })
+            showIndicator(stackStageOne, stackStageTwo, stackStageThree)
+            if(stackStageOne.length == 0 && stackStageTwo.length == 0 && stackStageThree.length == 0) {
+                cardShirt.removeEventListener('click', show)
+            }
+        }
     }
 }
 
